@@ -1,8 +1,14 @@
 from flask import json, Flask
 from werkzeug.exceptions import HTTPException
+from app.api import blueprints
 
 
 app = Flask(__name__)
+
+
+# register blueprints
+for b in blueprints:
+    app.register_blueprint(b)
 
 
 # register error handler
