@@ -1,5 +1,5 @@
 import unittest
-from app import app
+from app.tests import test_client
 
 
 class BaseApiTestCase(unittest.TestCase):
@@ -7,7 +7,7 @@ class BaseApiTestCase(unittest.TestCase):
 
     def setUp(self):
         self.endpoint = ''
-        self.client = app.test_client()
+        self.client = test_client
 
     def tearDown(self):
         self.client = None
