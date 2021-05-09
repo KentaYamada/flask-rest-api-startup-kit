@@ -1,6 +1,6 @@
 class DevelopmentConfig:
     """
-        Default flask app configration
+        Flask app development mode configration
         see: https://flask.palletsprojects.com/en/master/config/
     """
     ENV = 'development'
