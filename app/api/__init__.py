@@ -1,5 +1,5 @@
-from app.api.sample import sample_api
+import app.api.sample
 
 blueprints = [
-    sample_api
+    sample.bp
 ]

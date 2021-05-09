@@ -3,7 +3,7 @@ from werkzeug.exceptions import BadRequest, NotFound
 from app.libs.json_response import Created, NoContent, OK
 
 
-sample_api = Blueprint('sample', __name__, url_prefix='/api/samples')
+bp = Blueprint('sample', __name__, url_prefix='/api/samples')
 languages = [
     {'id': 1, 'language': 'python'},
     {'id': 2, 'language': 'rust'},
@@ -11,12 +11,12 @@ languages = [
     {'id': 4, 'language': 'c'}
 ]
 
-@sample_api.route('/', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def get():
     return OK({'message': 'ham'})
 
 
-@sample_api.route('/<int:id>', methods=['GET'])
+@bp.route('/<int:id>', methods=['GET'])
 def get_by_language(id):
     data = next((l for l in languages if id == l['id']), None)
     if data is None:
@@ -24,7 +24,7 @@ def get_by_language(id):
     return OK(data)
 
 
-@sample_api.route('/', methods=['POST'])
+@bp.route('/', methods=['POST'])
 def post():
     payload = request.get_json()
     if payload is None:
@@ -38,7 +38,7 @@ def post():
     return Created(data)
 
 
-@sample_api.route('/<int:id>', methods=['PUT'])
+@bp.route('/<int:id>', methods=['PUT'])
 def put(id):
     payload = request.get_json()
     whitelist = {'language'}
@@ -50,7 +50,7 @@ def put(id):
             return OK(l)
     raise NotFound(description='Language is not exist')
 
-@sample_api.route('/<int:id>', methods=['DELETE'])
+@bp.route('/<int:id>', methods=['DELETE'])
 def delete(id):
     for i, l in enumerate(languages):
         if l['id'] == id:
